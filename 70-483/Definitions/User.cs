@@ -10,8 +10,10 @@ namespace Exam70_483.Definitions
     [XmlRoot("CompanyUser", Namespace = "http://user")]
     public class User
     {
+        public int Id { get; set; }
+
         [XmlAttribute("ProspectId")]
-        public Guid Id { get; set; }
+        public Guid Guid { get; set; }
 
         [XmlElement("Group")]
         public Group UserGroup { get; set; }

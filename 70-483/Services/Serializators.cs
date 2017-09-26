@@ -46,9 +46,9 @@ namespace Exam70_483.Services
             return rateCollection;
         }
 
-        public static string SerializeWithDataContractJson(Rate rate)
+        public static string SerializeWithDataContractJson<T>(T rate)
         {
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Rate));
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));
             MemoryStream stream1 = new MemoryStream();
             ser.WriteObject(stream1, rate);
             stream1.Position = 0;
@@ -57,9 +57,9 @@ namespace Exam70_483.Services
             return sr.ReadToEnd();
         }
 
-        public static string SerializeWithDataContract(Rate rate)
+        public static string SerializeWithDataContract<T>(T rate)
         {
-            DataContractSerializer ser = new DataContractSerializer(typeof(Rate));
+            DataContractSerializer ser = new DataContractSerializer(typeof(T));
             using (MemoryStream ms = new MemoryStream())
             {
                 ser.WriteObject(ms, rate);
@@ -68,6 +68,21 @@ namespace Exam70_483.Services
                 {
                     return sr.ReadToEnd();
                 }
+            }
+        }
+
+        public static string SerializeWithBinaryWriter<T>(T obj)
+        {
+            var memoryStream = new MemoryStream();
+            var serializer = new DataContractSerializer(typeof(T));
+            XmlDictionaryWriter binaryWriter = XmlDictionaryWriter.CreateBinaryWriter(memoryStream);
+            serializer.WriteObject(binaryWriter, obj);
+            binaryWriter.Flush();
+
+            memoryStream.Position = 0;
+            using (StreamReader sr = new StreamReader(memoryStream))
+            {
+                return sr.ReadToEnd();
             }
         }
 

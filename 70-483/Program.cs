@@ -24,6 +24,7 @@ namespace Exam70_483
 
         static void Main(string[] args)
         {
+            string userSerialized = Serializators.SerializeWithBinaryWriter(new Product { Id = 10 });
             DateTime? nullableDateTime = null;
             bool isDateNotNull = nullableDateTime.HasValue;
 
