@@ -16,12 +16,27 @@ namespace Exam70_483.Services
             var fileBytes = File.ReadAllBytes(fileName);
 
             var outputBuffer = new byte[fileBytes.Length];
+
             hasher.TransformBlock(fileBytes, 0, fileBytes.Length, outputBuffer, 0);
             //hasher.TransformFinalBlock(fileBytes, fileBytes.Length - 1, fileBytes.Length);
             return outputBuffer;
 
             hasher.ComputeHash(fileBytes);
             return hasher.Hash;
+        }
+
+        public static string HashAlgorithmBySHA1(string input)
+        {
+            byte[] sha1byte = SHA1.Create().ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            var sb = new StringBuilder();
+            foreach (byte b in sha1byte)
+            {
+                sb.Append(b.ToString("X2"));
+            }
+            string sha1hash = sb.ToString();
+
+            return sha1hash;
         }
     }
 }

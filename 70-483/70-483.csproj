@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Definitions\Employee.cs" />
     <Compile Include="Definitions\Logger.cs" />
+    <Compile Include="Definitions\Person.cs" />
     <Compile Include="Definitions\Product.cs" />
     <Compile Include="Definitions\Rate.cs" />
     <Compile Include="Definitions\User.cs" />

@@ -24,6 +24,16 @@ namespace Exam70_483
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Available memory: " + new PerformanceCounter("Memory", "Available MBytes").NextValue());
+
+            var assemblies = new Reflections().GetTypesFromCurrentDomain();
+
+            Product productForSerialization = new Product() { CategoryId = 1, Id = 2, IsValid = true };
+
+            Serializators.SerializeWithBinaryFormatter(productForSerialization, "bin.dat");
+            Serializators.SerializeWithDataContractToFile(productForSerialization, "datacontract.dat");
+
+
             string userSerialized = Serializators.SerializeWithBinaryWriter(new Product { Id = 10 });
             DateTime? nullableDateTime = null;
             bool isDateNotNull = nullableDateTime.HasValue;
@@ -108,19 +118,6 @@ namespace Exam70_483
                     where grouped.Key > 1
                     select grouped.Key;
 
-            // gcAllowVeryLargeObjects 
-            // token.ThrowIfCancellationRequested();
-
-            //HashAlgorithm hasher = HashAlgorithm.Create(algName);
-            //hasher.ComputeHash(fileBytes);
-            //return hasher.Hash;
-
-            //TaskCompletionSource<T>
-            //TaskFactory.FromAsync()
-
-            // xmlDictionaryWriter.Flush();
-
-            // AssemblyDelaySignAttribute -  space is reserved for the signature which is later filled by a signing tool such as the Sn.exe utility
 
             string xmlInput = "<xml><RateSheet><rate category=\"boutou\" date=\"2012-12-12\"><value>0.03</value></rate><rate category=\"druga\" date=\"2011-11-11\"><value>0.04</value></rate></RateSheet></xml>";
 
@@ -132,6 +129,14 @@ namespace Exam70_483
             Class1 class1 = new Class1();
             INewInterface interf = class1;
             interf.Method1();
+
+            IEnumerable<Person> people = new List<Person>() {
+                new Person { PhoneNumbers = new List<PhoneNumber> { new PhoneNumber { Number = "1" }, new PhoneNumber { Number = "2" } } },
+                new Person { PhoneNumbers = new List<PhoneNumber> { new PhoneNumber { Number = "2" }, new PhoneNumber { Number = "3" } } },
+            };
+
+            IEnumerable<IEnumerable<PhoneNumber>> phoneLists = people.Select(p => p.PhoneNumbers);
+            IEnumerable<PhoneNumber> phoneNumbers = people.SelectMany(p => p.PhoneNumbers);
 
         }
     }

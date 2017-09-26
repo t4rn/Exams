@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,28 +47,46 @@ namespace Exam70_483.Services
             return rateCollection;
         }
 
-        public static string SerializeWithDataContractJson<T>(T rate)
+        public static string SerializeWithDataContractJson<T>(T obj)
         {
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));
             MemoryStream stream1 = new MemoryStream();
-            ser.WriteObject(stream1, rate);
+            ser.WriteObject(stream1, obj);
             stream1.Position = 0;
             StreamReader sr = new StreamReader(stream1);
 
             return sr.ReadToEnd();
         }
 
-        public static string SerializeWithDataContract<T>(T rate)
+        public static string SerializeWithDataContract<T>(T obj)
         {
             DataContractSerializer ser = new DataContractSerializer(typeof(T));
             using (MemoryStream ms = new MemoryStream())
             {
-                ser.WriteObject(ms, rate);
+                ser.WriteObject(ms, obj);
                 ms.Position = 0;
                 using (StreamReader sr = new StreamReader(ms))
                 {
                     return sr.ReadToEnd();
                 }
+            }
+        }
+
+        public static void SerializeWithDataContractToFile<T>(T obj, string fileName)
+        {
+            using (FileStream fs = new FileStream(fileName, FileMode.Create))
+            {
+                DataContractSerializer dcSerializer = new DataContractSerializer(typeof(T));
+                dcSerializer.WriteObject(fs, obj);
+            }
+        }
+
+        public static void SerializeWithBinaryFormatter<T>(T obj, string fileName)
+        {
+            using (FileStream fs = new FileStream(fileName, FileMode.Create))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(fs, obj);
             }
         }
 
@@ -92,5 +111,4 @@ namespace Exam70_483.Services
             return ser.Deserialize<T>(json);
         }
     }
-
 }

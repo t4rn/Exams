@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Exam70_483.Definitions
 {
+    [Serializable]
     public class Product : IValidatableObject
     {
         public int Id { get; set; }

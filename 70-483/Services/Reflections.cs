@@ -22,5 +22,14 @@ namespace Exam70_483.Services
                 props.FirstOrDefault(x => x.Name == setCos).SetValue(obj, true);
             }
         }
+
+        public List<Type> GetTypesFromCurrentDomain()
+        {
+            var x = GetType();
+            List<Type> types = (AppDomain.CurrentDomain.GetAssemblies().SelectMany(t => t.GetTypes())
+                .Where(t => t.IsClass && t.Assembly == this.GetType().Assembly)).ToList<Type>();
+
+            return types;
+        }
     }
 }

@@ -9,11 +9,25 @@ namespace Exam70_483.Services
 {
     public static class Regexes
     {
-        public static bool ContainsHyperlink(string inputData)
+        public static bool CompiledPattern(string inputData)
         {
             string regExPattern = "";
             var evaluator = new Regex(regExPattern, RegexOptions.Compiled);
             return evaluator.IsMatch(inputData);
+        }
+
+        public static List<string> CheckIfWebsite(string urls)
+        {
+            List<string> result = new List<string>();
+
+            const string pattern = @"http://(www\\.)?([^\\.]+)\\.com";
+
+            MatchCollection myMatches = Regex.Matches(urls, pattern);
+
+            result = (from
+                Match m in myMatches
+                      select m.Value).ToList();
+            return result;
         }
     }
 }
