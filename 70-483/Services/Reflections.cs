@@ -31,5 +31,15 @@ namespace Exam70_483.Services
 
             return types;
         }
+
+        public Type[] GetPublicTypes()
+        {
+            return Assembly.GetAssembly(this.GetType()).GetExportedTypes();
+        }
+
+        public string GetAssemblyName()
+        {
+            return Assembly.GetAssembly(this.GetType()).FullName;
+        }
     }
 }

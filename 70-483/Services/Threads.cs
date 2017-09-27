@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Exam70_483.Services
@@ -18,13 +19,42 @@ namespace Exam70_483.Services
 
         }
 
-        async void Start() {
+        async void Start()
+        {
             string res = await GetData();
         }
 
         private Task<string> GetData()
         {
             throw new NotImplementedException();
+
+            CancellationToken token = new CancellationToken();
+            token.ThrowIfCancellationRequested();
+            CancellationTokenSource source = new CancellationTokenSource();
+            source.Cancel();
+        }
+
+
+        public static void RunTimer()
+        {
+            var tokenSource = new CancellationTokenSource();
+            Task<int> task = Task.Factory.StartNew<int>(() => RunTimer(tokenSource.Token));
+            Console.WriteLine("Press [Enter] to stop the timer.");
+            Console.ReadLine();
+
+            tokenSource.Cancel();
+            Console.WriteLine("Timer stopped at {0}", task.GetAwaiter().GetResult());
+            Console.ReadLine();
+        }
+
+        private static int RunTimer(CancellationToken cancellationToken)
+        {
+            int time = 0;
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                time++;
+            }
+            return time;
         }
     }
 }

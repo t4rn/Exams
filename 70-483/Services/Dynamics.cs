@@ -10,16 +10,23 @@ namespace Exam70_483.Services
 {
     public class Dynamics
     {
-        public void DynamicsAndExpando()
+        public void SendAnonymous(string from)
+        {
+            var message = new { author = from };
+            SendMessage(message);
+        }
+
+        public void SendExpandoObject(string from)
         {
             dynamic message = new ExpandoObject();
-            message.From = "John";
+            message.From = from;
             SendMessage(message);
-
         }
 
         private void SendMessage(dynamic message)
         {
+            Console.WriteLine($"Message: {message}");
+
             var ct = new CodeTypeDeclaration("asd");
             ct.IsClass = true;
             ct.Attributes = MemberAttributes.Public;

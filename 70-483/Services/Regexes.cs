@@ -29,5 +29,17 @@ namespace Exam70_483.Services
                       select m.Value).ToList();
             return result;
         }
+
+        public static bool PositiveWithTwoDecimalPlaces(decimal number)
+        {
+            bool result = false;
+            Regex reg = new Regex(@"^\d+(\.\d\d)?$");
+            if (reg.IsMatch(number.ToString()))
+            {
+                result = true;
+            }
+
+            return result;
+        }
     }
 }

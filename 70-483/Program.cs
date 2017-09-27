@@ -24,6 +24,11 @@ namespace Exam70_483
 
         static void Main(string[] args)
         {
+            Threads.RunTimer();
+            var publicTypes = new Reflections().GetPublicTypes();
+            var assemblyName = new Reflections().GetAssemblyName();
+            var isPositiveDecimal = Regexes.PositiveWithTwoDecimalPlaces(5.666M);
+
             Console.WriteLine("Available memory: " + new PerformanceCounter("Memory", "Available MBytes").NextValue());
 
             var assemblies = new Reflections().GetTypesFromCurrentDomain();

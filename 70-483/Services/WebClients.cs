@@ -18,5 +18,16 @@ namespace Exam70_483.Services
 
             return client.UploadValuesTaskAsync(new Uri(url), nvc);
         }
+
+        public bool DownloadFile(string address, string fileName)
+        {
+            using (WebClient client = new WebClient())
+            {
+                client.DownloadFile(address, fileName);
+            }
+
+            return true;
+        }
+
     }
 }

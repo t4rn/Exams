@@ -10,18 +10,16 @@ namespace Exam70_483.Services
 {
     public class Hashers
     {
-        public static byte[] HashByAlgName(string fileName, string algName)
+        public static byte[] HashByAlgName(string fileName, string hashAlgorithm)
         {
-            HashAlgorithm hasher = HashAlgorithm.Create(algName);
+            HashAlgorithm hasher = HashAlgorithm.Create(hashAlgorithm);
             var fileBytes = File.ReadAllBytes(fileName);
 
             var outputBuffer = new byte[fileBytes.Length];
 
             hasher.TransformBlock(fileBytes, 0, fileBytes.Length, outputBuffer, 0);
-            //hasher.TransformFinalBlock(fileBytes, fileBytes.Length - 1, fileBytes.Length);
-            return outputBuffer;
 
-            hasher.ComputeHash(fileBytes);
+            return hasher.ComputeHash(fileBytes);
             return hasher.Hash;
         }
 

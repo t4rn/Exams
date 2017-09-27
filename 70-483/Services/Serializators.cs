@@ -110,5 +110,17 @@ namespace Exam70_483.Services
             var ser = new JavaScriptSerializer();
             return ser.Deserialize<T>(json);
         }
+
+        public static T DeserializeWithDataContractJson<T>(string input)
+        {
+            T obj = default(T);
+            DataContractJsonSerializer jsSerializer = new DataContractJsonSerializer(typeof(T));
+            using (MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(input)))
+            {
+                obj = (T)jsSerializer.ReadObject(memoryStream);
+            }
+
+            return obj;
+        }
     }
 }
