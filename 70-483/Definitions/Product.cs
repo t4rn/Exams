@@ -13,7 +13,8 @@ namespace Exam70_483.Definitions
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }
-        protected string Name { get; private set; }
+        public string Category { get; set; }
+        public string Name { get;  set; }
         public bool IsValid { get; set; }
 
         public delegate void AddProductCallback(int i);

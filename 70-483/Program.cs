@@ -24,6 +24,16 @@ namespace Exam70_483
 
         static void Main(string[] args)
         {
+            var customers = Linqers.CustomersWithOrdersByYear(2017);
+            Linqers.GetProductsLongestNameByCategory();
+
+            string asyncResult;
+            Task.Run(async () =>
+            {
+                asyncResult = await Threads.StartAsync();
+            }).GetAwaiter().GetResult();
+
+            
             Threads.RunTimer();
             var publicTypes = new Reflections().GetPublicTypes();
             var assemblyName = new Reflections().GetAssemblyName();

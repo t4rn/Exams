@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Definitions\CustomerOrder.cs" />
     <Compile Include="Definitions\Employee.cs" />
     <Compile Include="Definitions\Logger.cs" />
     <Compile Include="Definitions\Person.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Services\Counters.cs" />
     <Compile Include="Services\Dynamics.cs" />
     <Compile Include="Services\Hashers.cs" />
+    <Compile Include="Services\Linqers.cs" />
     <Compile Include="Services\Reflections.cs" />
     <Compile Include="Services\Regexes.cs" />
     <Compile Include="Services\Serializators.cs" />

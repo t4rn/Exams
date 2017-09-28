@@ -19,13 +19,18 @@ namespace Exam70_483.Services
 
         }
 
-        async void Start()
+        public static async Task<string> StartAsync()
         {
             string res = await GetData();
+
+            return res;
         }
 
-        private Task<string> GetData()
+        private static async Task<string> GetData()
         {
+            return await Task.Run(() => { return "asd"; });
+            //return await new Task<string>(() => { return "asd"; });
+
             throw new NotImplementedException();
 
             CancellationToken token = new CancellationToken();
