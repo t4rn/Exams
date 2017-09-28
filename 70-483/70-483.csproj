@@ -57,7 +57,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Comparers.cs" />
     <Compile Include="Services\Counters.cs" />
+    <Compile Include="Services\Debuggers.cs" />
     <Compile Include="Services\Dynamics.cs" />
+    <Compile Include="Services\Formaters.cs" />
     <Compile Include="Services\Hashers.cs" />
     <Compile Include="Services\Linqers.cs" />
     <Compile Include="Services\Reflections.cs" />

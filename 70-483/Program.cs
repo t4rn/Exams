@@ -24,6 +24,9 @@ namespace Exam70_483
 
         static void Main(string[] args)
         {
+            Trace.Write("START");
+            Formaters.DateAndTime(DateTime.Now, 10.23456D);
+            Debuggers.Start();
             var customers = Linqers.CustomersWithOrdersByYear(2017);
             Linqers.GetProductsLongestNameByCategory();
 
