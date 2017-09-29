@@ -25,6 +25,19 @@ namespace Exam70_483
         static void Main(string[] args)
         {
             Trace.Write("START");
+
+            Debuggers.LogError("error occured");
+            Debuggers.LogError(new Exception("ex occured"));
+
+            Dictionary<string, int> dict = new Dictionary<string, int>()
+            {
+                {"Marketing", 1 }, {"Sales", 2 }, { "IT", 3 }
+            };
+
+            var dictExists = dict.Contains(new KeyValuePair<string, int>( "IT", 2 ));
+
+
+
             Formaters.DateAndTime(DateTime.Now, 10.23456D);
             Debuggers.Start();
             var customers = Linqers.CustomersWithOrdersByYear(2017);
